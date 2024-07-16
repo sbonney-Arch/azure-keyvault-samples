@@ -20,6 +20,7 @@ The .NET sample demonstrates how to create and retrieve secrets from Azure Key V
 ### Running the Powershell Sample
 
 1. Install required modules
+   ```sh
       Install-Module -Name Az -AllowClobber -Force
-2. Update 'Sample-AzKeyVault' with your Azure Key Vault details
-3. Run the Powershell script
+3. Update 'Sample-AzKeyVault' with your Azure Key Vault details
+4. Run the Powershell script
