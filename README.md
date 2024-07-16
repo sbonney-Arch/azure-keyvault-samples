@@ -9,6 +9,7 @@ The .NET sample demonstrates how to create and retrieve secrets from Azure Key V
 ### Running the .NET Sample
 
 1. Install required NuGet packages:
+   ```sh
      dotnet add package Azure.Identity
      dotnet add package Azure.Security.KeyVault.Secrets
 3. Update `Program.cs` with your Azure Key Vault details.
