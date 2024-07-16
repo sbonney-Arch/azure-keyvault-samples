@@ -1,0 +1,26 @@
+# Define variables
+$tenantId = "<your-tenant-id-here>"
+$clientId = "<your-client-id-here>"
+$clientSecret = "<your-client-secret-here>"
+$keyVaultName = "<key-vault-name-here>"
+$secretName = "<secret-name-here>"
+
+# Convert client secret to secure string
+$secureClientSecret = ConvertTo-SecureString $clientSecret -AsPlainText -Force
+
+# Create a credential object
+$psCred = New-Object System.Management.Automation.PSCredential ($clientId, $secureClientSecret)
+
+# Connect to Azure using the service principal
+Connect-AzAccount -ServicePrincipal -Tenant $tenantId -Credential $psCred
+
+# Retrieve the secret from the Key Vault
+$secret = Get-AzKeyVaultSecret -VaultName $keyVaultName -Name $secretName
+
+# Output the secret value
+if ($secret -ne $null) {
+    $secretValue = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secret.SecretValue))
+    Write-Output "Secret Value: $secretValue"
+} else {
+    Write-Output "The secret could not be retrieved or is empty."
+}
